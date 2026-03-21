@@ -1,157 +1,171 @@
-import React, {useState} from 'react'
-import HeroImage from "../assets/HeroImage.jpg"
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import HeroImage from "../assets/HeroImage.jpg";
+import Login from "./Auth/Login.jsx";
+import Signup from "./Auth/Signup.jsx";
+import Modal from "../UI/Modal.jsx";
 
 const LandingPage = () => {
     const navigate = useNavigate();
+    const [openAuthModal, setOpenAuthModal] = useState(true);
+    const [currentPage, setCurrentPage] = useState("login");
 
-    const [openAuthModal, setOpenAuthModal] = useState(false);
-    const[currentPage, setCurrentPage] = useState("login");
+    const handleCTA = () => {
+        
+    };
 
-    const handleCTA =() => {};
     return (
-        <div className="w-full min-h-full bg-white">
-            <div className="container mx-auto px-4 py-6">
-                {/*---Header---*/}
-                <header className="flex justify-between items-center mb-16">
-                    <div className="text-2xl font-bold">Resume Builder</div>
+        <div className="w-full min-h-screen bg-white flex flex-col font-sans">
+
+            {/*--- Navigation & Hero Section (Inside Container) ---*/}
+            <div className="container mx-auto px-6 flex-grow">
+                <header className="flex justify-between items-center py-8 mb-12">
+                    <div className="text-2xl font-black tracking-tighter italic">
+                      Resume<span className="text-purple-600">Builder</span>
+                    </div>
                     <button
-                        className="bg-purple-500 text-sm font-semibold text-black px-7 py-2.5 rounded-lg hover:bg-gray-800 transition-colors cursor-pointer"
+                        className="bg-purple-600 text-sm font-bold text-white px-8 py-3 rounded-xl hover:bg-purple-700 transition-all cursor-pointer shadow-lg active:scale-95"
                         onClick={() => setOpenAuthModal(true)}>
                         Login/Signup
                     </button>
                 </header>
 
-                {/*---Hero Content---*/}
-                <div className="flex flex-col md:flex-row items-center">
-                    <div className="w-full md:w-1/2 pr-4 mb-8 md:mb-0">
-                        <h1 className="text-5xl font-bold mb-6 leading-tight">
-                            Build your {" "}
-                            <span
-                                className="text-transparent bg-clip-text bg-[radial-gradient(circle,_#7182ff_0%,_#3cff52_100%)] bg-[length:200%_200%] animate-text-shine">
-                                Resume in a professional way
+                {/* Hero Content */}
+                <div className="flex flex-col md:flex-row items-center mb-28">
+                    <div className="w-full md:w-1/2 md:pr-12 mb-12 md:mb-0">
+                        <h1 className="text-5xl md:text-7xl font-extrabold mb-6 leading-[1.1]">
+                            Build your <br/>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-500 to-emerald-500">
+                                Resume in 5 Mins
                             </span>
                         </h1>
-                        <p className="text-lg text-gray-700 mb-8">
-                            Build resumes that will always standout in this competitive technological era effortlessly.
+                        <p className="text-xl text-gray-500 mb-10 leading-relaxed max-w-lg">
+                            Effortlessly create professional, industry-standard resumes that bypass ATS filters and grab attention.
                         </p>
                         <button
-                            className="bg-black text-sm font-semibold text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors cursor-pointer"
+                            className="bg-slate-950 text-white px-12 py-5 rounded-2xl font-bold text-lg hover:bg-slate-800 transform hover:-translate-y-1 transition-all shadow-2xl cursor-pointer"
                             onClick={handleCTA}>
-                            Get started
+                            Get Started
                         </button>
                     </div>
-                    <div className="w-full md:w-1/2 pb-4">
-                        <img src={HeroImage} alt="HeroImage" className="w-full rounded-lg"/>
+                    <div className="w-full md:w-1/2 relative">
+                        <div className="absolute -inset-4 bg-gradient-to-tr from-purple-500/10 to-blue-500/10 blur-3xl rounded-full"></div>
+                        <img
+                            src={HeroImage}
+                            alt="Resume Builder Preview"
+                            className="relative w-full rounded-[2rem] shadow-2xl border border-slate-100"
+                        />
                     </div>
                 </div>
 
-                <section className="mt-10">
-                    <h2 className="text-2xl font-bold mb-12 items-center">
-                        Features that will make the process faster
+                {/* Features Section */}
+                <section className="pb-24">
+                    <h2 className="text-3xl font-bold mb-16 text-center text-slate-900">
+                        Everything you need to get hired
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div
-                            className="bg-gradient-to-br from-sky-300 to-blue-500 rounded-xl p-6 shadow-sm hover:shadow-md transition">
-                            <h3 className="text-lg font-semibold mb-3">Easy Editing</h3>
-                            <p className="text-gray-950">
-                                Update you resume sections with live preview and instant formating.
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                        {/* Blue Card */}
+                        <div className="bg-gradient-to-br from-sky-400 to-blue-600 rounded-xl p-10 shadow-xl hover:shadow-2xl transition-all group">
+                            <h3 className="text-2xl font-bold mb-4 text-white group-hover:scale-105 transition-transform origin-left">Easy Editing</h3>
+                            <p className="text-blue-50 text-md leading-relaxed">
+                                Update your sections with a lightning-fast live preview. No more guessing.
                             </p>
                         </div>
 
-                        <div
-                            className="bg-gradient-to-br from-aquamarine-300 via-lime-300 to-yellow-200 p-6 rounded-xl shadow-sm hover:shadow-md transition">
-                            <h3 className="text-lg font-semibold mb-3">
-                                One click export
-                            </h3>
-                            <p className="text-gray-950">
-                                Download your CV instantly in a high quality oficial PDF format.
+                        {/* Lime Card */}
+                        <div className="bg-gradient-to-br from-emerald-300 via-green-200 to-yellow-200 p-10 rounded-xl shadow-xl hover:shadow-2xl transition-all group">
+                            <h3 className="text-2xl font-bold mb-4 text-emerald-950 group-hover:scale-105 transition-transform origin-left">PDF Export</h3>
+                            <p className="text-emerald-900 text-md leading-relaxed">
+                                Ready to apply? Export your CV in a high-quality, official PDF format instantly.
                             </p>
                         </div>
 
-                        <div
-                            className="bg-gradient-to-br from-violet-600 to-fuchsia-500 rounded-xl p-6 shadow-sm hover:shadow-md transition">
-                            <h3 className="text-lg font-semibold mb-3">
-                                Beautiful Templates
-                            </h3>
-                            <p className="text-gray-950">
-                                Choose from modern, profesional templates that are way easy to customize
+                        {/* Purple Card */}
+                        <div className="bg-gradient-to-br from-violet-600 to-fuchsia-500 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all group">
+                            <h3 className="text-2xl font-bold mb-4 text-white group-hover:scale-105 transition-transform origin-left">Pro Templates</h3>
+                            <p className="text-purple-50 text-md leading-relaxed">
+                                Modern, recruiter-tested templates designed to showcase your skills.
                             </p>
                         </div>
-
                     </div>
                 </section>
+            </div>
 
-                {/* Footer - Added mt-20 for spacing */}
-                <div className="mt-20">
-                    <footer className="w-[100%] bg-slate-950 text-slate-400 py-12">
-                        {/* The "Ninja" Gradient Line - Full Width */}
-                        <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-blue-500 via-emerald-400 to-violet-600"></div>
+            {/*--- Full-Width Footer (Outside Container) ---*/}
+            <footer className="w-full bg-slate-950 text-slate-400 py-20 relative">
+                {/* Ninja Line */}
+                <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-blue-500 via-emerald-400 to-violet-600"></div>
 
-                        <div className="max-w-7xl mx-auto px-6">
-                            <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div className="max-w-7xl mx-auto px-6">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
+                        <div className="col-span-1 md:col-span-1">
+                            <h2 className="text-white text-2xl font-bold tracking-tighter mb-6">
+                                BYTECODE<span className="text-emerald-400">NINJA</span>
+                            </h2>
+                            <p className="text-sm leading-relaxed max-w-xs">
+                                Precision-engineered resumes for the next generation of tech talent.
+                            </p>
+                        </div>
 
-                                {/* Brand Section */}
-                                <div className="col-span-1">
-                                    <h2 className="text-white text-xl font-bold tracking-tighter mb-4">
-                                        BYTECODE<span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">NIJA</span>
-                                    </h2>
-                                    <p className="text-sm leading-relaxed">
-                                        Leveling up your professional presence with precision-engineered resumes.
-                                    </p>
+                        <div>
+                            <h3 className="text-white font-bold mb-6 text-xs uppercase tracking-widest">Builder</h3>
+                            <ul className="space-y-4 text-sm">
+                                <li><a href="#" className="hover:text-emerald-400 transition-colors">Templates</a></li>
+                                <li><a href="#" className="hover:text-blue-400 transition-colors">Fast</a></li>
+                                <li><a href="#" className="hover:text-violet-400 transition-colors">Easy</a></li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 className="text-white font-bold mb-6 text-xs uppercase tracking-widest">Support</h3>
+                            <ul className="space-y-4 text-sm">
+                                <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
+                                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+                                <li className="flex items-center gap-2">
+                                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                    Systems OK
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 className="text-white font-bold mb-6 text-xs uppercase tracking-widest">Follow</h3>
+                            <div className="flex gap-4">
+                                <div className="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center hover:border-blue-500 transition-all cursor-pointer group">
+                                    <span className="text-xs font-bold group-hover:text-white">GH</span>
                                 </div>
-
-                                {/* Builder Section */}
-                                <div>
-                                    <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Builder</h3>
-                                    <ul className="space-y-2 text-sm">
-                                        <li><a href="#" className="hover:text-emerald-400 transition-colors">Templates</a></li>
-                                        <li><a href="#" className="hover:text-blue-400 transition-colors">AI Writer</a></li>
-                                        <li><a href="#" className="hover:text-violet-400 transition-colors">Examples</a></li>
-                                    </ul>
-                                </div>
-
-                                {/* System Section */}
-                                <div>
-                                    <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">System</h3>
-                                    <ul className="space-y-2 text-sm">
-                                        <li><a href="#" className="hover:text-white transition-colors">Changelog</a></li>
-                                        <li><a href="#" className="hover:text-white transition-colors">API Docs</a></li>
-                                        <li className="flex items-center gap-2">
-                                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                                            Operational
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                {/* Connect Section */}
-                                <div>
-                                    <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Connect</h3>
-                                    <div className="flex gap-4">
-                                        <div className="w-10 h-10 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center hover:border-blue-500 transition-all cursor-pointer group">
-                                            <span className="text-xs font-bold group-hover:text-white">GH</span>
-                                        </div>
-                                        <div className="w-10 h-10 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center hover:border-violet-500 transition-all cursor-pointer group">
-                                            <span className="text-xs font-bold group-hover:text-white">LI</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Bottom Bar */}
-                            <div className="mt-12 pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
-                                <p>&copy; {new Date().getFullYear()} BYTECODENIJA. Built for the next generation of developers.</p>
-                                <div className="flex gap-6">
-                                    <a href="#" className="hover:underline hover:text-white">Privacy</a>
-                                    <a href="#" className="hover:underline hover:text-white">Terms</a>
+                                <div className="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center hover:border-violet-500 transition-all cursor-pointer group">
+                                    <span className="text-xs font-bold group-hover:text-white">LI</span>
                                 </div>
                             </div>
                         </div>
-                    </footer>
-                </div>
+                    </div>
 
-            </div>
+                    <div className="mt-20 pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] uppercase tracking-widest">
+                        <p>&copy; {new Date().getFullYear()} BYTECODENINJA</p>
+                        <div className="flex gap-10">
+                            <a href="#" className="hover:text-white transition-colors">Privacy</a>
+                            <a href="#" className="hover:text-white transition-colors">Terms</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+            {/* Auth Modal Trigger */}
+            {openAuthModal && (
+                <Modal
+                    isOpen={openAuthModal}
+                    onClose={() => setOpenAuthModal(false)}
+                    hideHeader
+                >
+                    <div className="py-4">
+                        {currentPage === "login" && <Login setCurrentPage={setCurrentPage} />}
+                        {currentPage === "signup" && <Signup setCurrentPage={setCurrentPage} />}
+                    </div>
+                </Modal>
+            )}
         </div>
-    )
-}
-export default LandingPage
+    );
+};
+
+export default LandingPage;
