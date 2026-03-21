@@ -7,13 +7,13 @@ const Modal = ({
                    actionBtnText,
                    onActionClick,
                }) => {
-    return <div className="fixed inset-0 z-50 flex justify-center items-center w-full h-full bg-gray-800">
+    return <div className="fixed inset-0 z-50 flex justify-center items-center w-full h-full bg-white">
         {/*---Modal Content---*/}
-        <div className={'relative flex flex-col bg-amber-100 shadow-lg rounded-xl overflow-hidden'}>
+        <div className={'relative flex flex-col bg-gray-950 shadow-lg rounded-xl overflow-hidden'}>
             {/*---Madal Header---*/}
             {!hideHeader && (
                 <div className="flex items-center justify-between p-4 border-b border-gray-200">
-                    <h3 className="md:text-lg font-medium text-gray-900">{title}</h3>
+                    <h3 className="md:text-lg font-medium text-white">{title}</h3>
 
                     {showActionBtn && (
                         <button
