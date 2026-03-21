@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import HeroImage from "../assets/HeroImage.jpg";
 import Login from "./Auth/Login.jsx";
-import Signup from "./Auth/Signup.jsx";
+import SignUp from "./Auth/SignUp.jsx";
 import Modal from "../UI/Modal.jsx";
 
 const LandingPage = () => {
@@ -160,7 +160,7 @@ const LandingPage = () => {
                 >
                     <div className="py-4">
                         {currentPage === "login" && <Login setCurrentPage={setCurrentPage} />}
-                        {currentPage === "signup" && <Signup setCurrentPage={setCurrentPage} />}
+                        {currentPage === "signup" && <SignUp setCurrentPage={setCurrentPage} />}
                     </div>
                 </Modal>
             )}

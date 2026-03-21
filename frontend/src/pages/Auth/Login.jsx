@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
 import {useNavigate} from "react-router-dom";
 import Input from "../../components/inputs/Input.jsx";
+import {validateEmail} from "../../utils/helper.js";
 
-const Login = () => {
+const Login = ({ setCurrentPage }) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState(null)
@@ -18,13 +19,23 @@ const Login = () => {
             return;
         }
 
+        if (!password) {
+            setError("Please enter a password")
+            return;
+        }
+
         setError("")
 
         //Login API call
+        try {
+
+        }catch(error) {
+
+        }
     };
 
 
-    return <div className="w-[90vw] md:w-[33vw] p-7 flex flex-col justify-center items-center">
+    return <div className="w-[90vw] md:w-[33vw] p-7 flex flex-col justify-center items-center bg-gray-950 rounded-xl">
         <h3 className="text-lg font-semibold text-white">Welcome Back!</h3>
         <p className="text-sm text-white mt-[5px] mb-6">Please enter your details</p>
 
@@ -46,10 +57,10 @@ const Login = () => {
 
             {error && <p className="text-red-600 text-sm pb-2.5">{error}</p>}
 
-            <button type="submit" className="btn-primary">Login</button>
+            <button type="submit" className="btn-primary mb-4">Login</button>
 
             <p className="text-[13px] text-white">Don't have an account?{" "}
-            <button className="font-medium text-blue-500 cursor-pointer"
+            <button type="button" className="font-medium text-blue-500 cursor-pointer"
             onClick={() => {
                 setCurrentPage("signup");
             }}>SignUp</button>
